@@ -3,9 +3,10 @@ import AllDonerAndStatistics from "./Components/AllDonerAndStatistics";
 import BloodGroupAvailability from "./Components/BloodGroupAvailability";
 import DonarStats from "./Components/DonarStats";
 import SaveLifeTodayCard from "./Components/SaveLifeTodayCard";
+import { db } from "./Firebase/FIrebase";
 
 export default function Home() {
-
+console.log(db);
   return (
     <div className="min-h-screen bg-gray-100 flex flex-col items-center">
       {/* Main content area */}
