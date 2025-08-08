@@ -10,8 +10,6 @@ const Register = () => {
     villageCity: "",
     bloodGroup: "",
     phoneNumber: "",
-    emailAddress: "",
-    lastDonationDate: "",
   });
 
   // State to manage the status message after form submission.
@@ -39,7 +37,6 @@ const Register = () => {
       "villageCity",
       "bloodGroup",
       "phoneNumber",
-      "emailAddress",
     ];
     for (const field of requiredFields) {
       if (!formData[field]) {
@@ -63,8 +60,6 @@ const Register = () => {
       villageCity: "",
       bloodGroup: "",
       phoneNumber: "",
-      emailAddress: "",
-      lastDonationDate: "",
     });
   };
 

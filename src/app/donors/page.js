@@ -6,16 +6,16 @@ import { useBloodFighterContext } from "../Context/BloodFighter";
 
 export default function Donors() {
   const { bloodGroups } = useBloodFighterContext();
-  console.log(bloodGroups);
   const initialDonors = [
     {
       id: 1,
       name: "John Smith",
       age: 29,
+      phoneNumber: "01311078039",
       villageCity: "Dhaka",
       bloodGroup: "O+",
-      lastDonation: "4/15/2023",
-      nextDonation: "10/15/2023",
+      donationDate: "4/15/2023",
+      nextDonationDate: "10/15/2023",
       donations: 5,
       eligible: false,
     },
@@ -23,10 +23,11 @@ export default function Donors() {
       id: 2,
       name: "Sarah Johnson",
       age: 25,
+      phoneNumber: "01722334455",
       villageCity: "Khulna",
       bloodGroup: "A+",
-      lastDonation: "7/20/2024",
-      nextDonation: "1/20/2025",
+      donationDate: "7/20/2024",
+      nextDonationDate: "1/20/2025",
       donations: 4,
       eligible: true,
     },
@@ -34,10 +35,11 @@ export default function Donors() {
       id: 3,
       name: "Mike Davis",
       age: 32,
+      phoneNumber: "01833445566",
       villageCity: "Chittagong",
       bloodGroup: "B+",
-      lastDonation: "7/10/2024",
-      nextDonation: "1/10/2025",
+      donationDate: "7/10/2024",
+      nextDonationDate: "1/10/2025",
       donations: 3,
       eligible: true,
     },
@@ -45,10 +47,11 @@ export default function Donors() {
       id: 4,
       name: "Emily Wilson",
       age: 28,
+      phoneNumber: "01944556677",
       villageCity: "Sylhet",
       bloodGroup: "B+",
-      lastDonation: "3/25/2023",
-      nextDonation: "9/25/2023",
+      donationDate: "3/25/2023",
+      nextDonationDate: "9/25/2023",
       donations: 2,
       eligible: false,
     },
@@ -56,10 +59,11 @@ export default function Donors() {
       id: 5,
       name: "David Brown",
       age: 35,
+      phoneNumber: "01655667788",
       villageCity: "Gazipur",
       bloodGroup: "O-",
-      lastDonation: "9/8/2024",
-      nextDonation: "3/8/2025",
+      donationDate: "9/8/2024",
+      nextDonationDate: "3/8/2025",
       donations: 12,
       eligible: true,
     },
@@ -67,10 +71,11 @@ export default function Donors() {
       id: 6,
       name: "Lisa Anderson",
       age: 30,
+      phoneNumber: "01766778899",
       villageCity: "Rangpur",
       bloodGroup: "A-",
-      lastDonation: "7/30/2024",
-      nextDonation: "1/30/2025",
+      donationDate: "7/30/2024",
+      nextDonationDate: "1/30/2025",
       donations: 4,
       eligible: true,
     },
@@ -78,10 +83,11 @@ export default function Donors() {
       id: 7,
       name: "Robert Taylor",
       age: 41,
+      phoneNumber: "01877889900",
       villageCity: "Bogra",
       bloodGroup: "B-",
-      lastDonation: "6/15/2024",
-      nextDonation: "12/15/2024",
+      donationDate: "6/15/2024",
+      nextDonationDate: "12/15/2024",
       donations: 5,
       eligible: true,
     },
@@ -89,10 +95,11 @@ export default function Donors() {
       id: 8,
       name: "Jennifer Lee",
       age: 27,
+      phoneNumber: "01988990011",
       villageCity: "Comilla",
       bloodGroup: "AB-",
-      lastDonation: "7/18/2024",
-      nextDonation: "1/18/2025",
+      donationDate: "7/18/2024",
+      nextDonationDate: "1/18/2025",
       donations: 7,
       eligible: true,
     },
@@ -205,12 +212,12 @@ export default function Donors() {
                   <span className="font-semibold">Age:</span> {donor.age} years
                 </p>
                 <p className="text-gray-600 text-sm">
-                  <span className="font-semibold">Last Donation:</span>{" "}
-                  {donor.lastDonation}
+                  <span className="font-semibold">Donation Date:</span>{" "}
+                  {donor.donationDate}
                 </p>
                 <p className="text-gray-600 text-sm">
                   <span className="font-semibold">Next Donation:</span>{" "}
-                  {donor.nextDonation}
+                  {donor.nextDonationDate}
                 </p>
                 <p className="text-sm font-semibold mt-2">
                   {donor.eligible ? (
@@ -247,7 +254,11 @@ export default function Donors() {
           {filteredDonors.map((donor) => (
             <div
               key={donor.id}
-              className="bg-white rounded-2xl p-6 shadow-lg relative flex justify-between items-start">
+              className={`${
+                donor.eligible
+                  ? "bg-green-100 border border-green-300"
+                  : "bg-red-50 border border-red-400"
+              } rounded-2xl p-6 shadow-lg relative flex justify-between items-start`}>
               <div className="flex-grow">
                 <h3 className="text-lg font-bold text-gray-800">
                   {donor.name}
@@ -257,16 +268,22 @@ export default function Donors() {
                   <span className="font-semibold">Age:</span> {donor.age} years
                 </p>
                 <p className="text-gray-600 text-sm">
-                  <span className="font-semibold">Last Donation:</span>{" "}
-                  {donor.lastDonation}
+                  <span className="font-semibold">Donation Date:</span>{" "}
+                  {donor.donationDate}
                 </p>
                 <p className="text-gray-600 text-sm">
-                  <span className="font-semibold">Next Donation:</span>{" "}
-                  {donor.nextDonation}
+                  <span className="font-semibold">Next Donation Date:</span>{" "}
+                  {donor.nextDonationDate}
                 </p>
                 <p className="text-sm font-semibold mt-2">
                   {donor.eligible ? (
-                    <span className="text-green-600">Eligible</span>
+                    <>
+                      <span className="text-green-600">Eligible</span>{" "}
+                      <span className="px-5 text0xl font-bold text-gray-700">
+                        {donor.phoneNumber}
+                      </span>
+                      <a href={`tel:${donor.phoneNumber}`}>📞 Call Now</a>
+                    </>
                   ) : (
                     <span className="text-red-600">Not Eligible</span>
                   )}

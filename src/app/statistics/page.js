@@ -1,7 +1,10 @@
+"use client";
 import React from "react";
+import { useBloodFighterContext } from "../Context/BloodFighter";
 
 // The main component for the Statistics page.
 export default function StatisticsPage() {
+  const { bloodGroups } = useBloodFighterContext();
   // Dummy data for the statistics cards.
   const stats = {
     totalDonors: 123,
@@ -83,27 +86,36 @@ export default function StatisticsPage() {
           {bloodGroupStats.map((bg, index) => (
             <div key={index} className="mb-4">
               <div className="flex justify-between items-center mb-1">
-                <div className="flex items-center space-x-2">
-                  <span
-                    className={`w-8 h-8 rounded-full bg-red-600 text-white flex items-center justify-center font-bold text-xs`}>
-                    {bg.group}
-                  </span>
-                  <span className="text-sm text-gray-800">
-                    {bg.donors} donors
-                  </span>
+                <div className="flex items-center gap-5">
+                  {bloodGroups
+                    .filter((group) => group.group === bg.group)
+                    .map((group) => (
+                      <div
+                        key={group}
+                        className={`w-12 h-12 rounded-full ${group.color} text-black flex items-center justify-center font-bold text-lg mb-2`}>
+                        {bg.group}
+                      </div>
+                    ))}
+                  <div className="flex flex-col">
+                    <span className="text-sm text-gray-800">
+                      {bg.donors} donors
+                    </span>
+                    <span className="text-xs text-gray-500 mt-1">
+                      {bg.eligible} eligible
+                    </span>
+                  </div>
                 </div>
-                <span className="text-sm font-semibold text-gray-600">
-                  {bg.percentage}%
-                </span>
+                <div>
+                  <span className="text-sm  font-semibold text-gray-600">
+                    {bg.percentage}%
+                  </span>
+                  <div className="w-30 bg-gray-200 rounded-full h-2">
+                    <div
+                      className="bg-red-600 h-2 rounded-full"
+                      style={{ width: `${bg.percentage}%` }}></div>
+                  </div>
+                </div>
               </div>
-              <div className="w-full bg-gray-200 rounded-full h-2">
-                <div
-                  className="bg-red-600 h-2 rounded-full"
-                  style={{ width: `${bg.percentage}%` }}></div>
-              </div>
-              <p className="text-xs text-gray-500 mt-1">
-                {bg.eligible} eligible
-              </p>
             </div>
           ))}
         </div>
@@ -122,7 +134,7 @@ export default function StatisticsPage() {
                 <div
                   className="bg-red-600 h-4 rounded-full"
                   style={{ width: `${monthData.donations * 1.5}%` }}></div>
-                <span className="absolute top-0 right-2 text-xs font-semibold text-white">
+                <span className="absolute top-0 right-2 text-xs font-semibold text-black">
                   {monthData.donations}
                 </span>
               </div>
